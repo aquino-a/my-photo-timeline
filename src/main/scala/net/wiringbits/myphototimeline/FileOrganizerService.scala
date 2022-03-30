@@ -52,8 +52,8 @@ class FileOrganizerService(metadataService: MetadataService)(implicit logger: Si
     val year = createdOn.getYear.toString
     val monthName = createdOn.getMonth.toString.toLowerCase
     val monthNumber = createdOn.getMonthValue
-    val month = "%2d-%s".format(monthNumber, monthName).replace(" ", "0")
-    val parent = destinationDirectory / year / month
+    val month = "%1s %2$02d".format(year, monthNumber).strip()
+    val parent = destinationDirectory / month
     val destinationFile = getAvailablePath(parent, sourceFile.baseName, sourceFile.ext)
     os.move(sourceFile, destinationFile, replaceExisting = false, createFolders = true)
   }
